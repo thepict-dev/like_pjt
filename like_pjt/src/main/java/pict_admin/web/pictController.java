@@ -63,9 +63,17 @@ public class pictController {
 	//동작을 위한 Ajax
 	@RequestMapping("/btn_insert.do")
 	@ResponseBody
-	public void btn_insert(@ModelAttribute("pictVO") PictVO pictVO, ModelMap model, HttpServletRequest request, @RequestBody Map<String, Object> param) throws Exception {	
-		
+	public HashMap<String, Object> btn_insert(@ModelAttribute("pictVO") PictVO pictVO, ModelMap model, HttpServletRequest request, @RequestBody Map<String, Object> param) throws Exception {	
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		pictService.person_click(pictVO);
+		pictVO = pictService.led_select(pictVO);
+		if(pictVO != null) {
+			map.put("rst", pictVO);
+			return map;
+		}
+		else {
+			return map;
+		}
 		
 	}
 	@RequestMapping("/get_count.do")

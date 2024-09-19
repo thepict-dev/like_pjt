@@ -110,24 +110,7 @@
 		    	    	clearInterval(nIntervId);
 		    	    }
 		    	});
-				function ab(){
-					var param = {}
-
-					$.ajax({
-						url : "/btn_insert.do"
-						, type : "POST"
-						, data : JSON.stringify(param)
-						, contentType : "application/json"
-						, async : false
-						, success : function(data, status, xhr) {
-							console.log(data)
-						}
-						, error : function(xhr, status, error) {
-							console.log(xhr)
-							console.log("에러")
-						}
-					})
-				}
+				
 				
 				function bc(){
 					var param = {}
