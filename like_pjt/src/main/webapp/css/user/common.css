@@ -1,0 +1,403 @@
+@charset "UTF-8";
+
+@import url('https://webfontworld.github.io/sunn/SUIT.css');
+
+@font-face {
+    font-family: '210OmniGothic';
+    font-weight: 100;
+    src: url('../../font/210옴니고딕010.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: '210OmniGothic';
+    font-weight: 200;
+    src: url('../../font/210옴니고딕015.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: '210OmniGothic';
+    font-weight: 300;
+    src: url('../../font/210옴니고딕020.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: '210OmniGothic';
+    font-weight: 400;
+    src: url('../../font/210옴니고딕025.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: '210OmniGothic';
+    font-weight: 500;
+    src: url('../../font/210옴니고딕030.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: '210OmniGothic';
+    font-weight: 600;
+    src: url('../../font/210옴니고딕035.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: '210OmniGothic';
+    font-weight: 700;
+    src: url('../../font/210옴니고딕040.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: '210OmniGothic';
+    font-weight: 800;
+    src: url('../../font/210 옴니고딕 045.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: '210OmniGothic';
+    font-weight: 900;
+    src: url('../../font/210 옴니고딕 050.ttf') format('truetype');
+}
+
+:root {
+    --fn-suit: 'SUIT';
+    --fn-omni: '210OmniGothic';
+}
+
+body{
+    position: relative;
+    color: #000;
+	font-family: var(--fn-omni);
+    
+}
+body.no-scroll {
+    overflow: hidden;
+}
+
+button{
+	font-family: var(--fn-omni);
+}
+
+.blind {
+    width: 0;
+    height: 0;
+    text-indent: -9999px;
+    padding: 0;
+    margin: 0;
+    visibility: hidden;
+}
+
+.mt80{
+    margin-top: 80px;
+}
+.mt40{
+    margin-top: 40px;
+}
+
+.mb{
+    display: none;
+}
+@media all and (max-width : 1024px){
+    .pc{
+        display: none;
+    }
+    .mb{
+        display: block;
+    }
+}
+
+/* button */
+.blueButton{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    background: var(--navy-color);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 170%; /* 23.8px */
+    letter-spacing: -0.7px;
+}
+.blueButton:hover{
+    background: #10144c;
+}
+.blueButton.dot::before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+.blueButton.dot::after{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.linkButton{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding: 16px 0 16px 32px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 130%; /* 23.4px */
+    letter-spacing: -0.9px;
+}
+.linkButton.blk{
+    border: 1px solid #000;
+    width: 143px;
+}
+.linkButton.wt{
+    width: 176px;
+    border: 1px solid #fff;
+    background: rgba(0, 0, 0, 0.70);
+    color: #fff;
+}
+@media all and (max-width : 1024px){
+    .linkButton{
+        font-size: 14px;
+        padding: 14px 0 14px 32px;
+    }
+    .linkButton.blk{
+        width: 125px;
+    }
+    .linkButton.wt{
+        width: 151px;
+    }
+    .linkButton img{
+        width: 20px;
+    }
+}
+
+.fullButtonContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+    width: 100%;
+}
+.fullButtonContainer a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    /* color: #FFF; */
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 170%; /* 23.8px */
+    letter-spacing: -0.7px;
+    /* background-color: var(--navy-color); */
+}
+.fullButtonContainer a.bl{
+    color: #FFF;
+    background-color: var(--navy-color);
+}
+.fullButtonContainer a.wt{
+    border: 1px solid var(--grey-100);
+    background: #FFF;
+}
+.fullButtonContainer a.bl:hover{
+    background-color: #0f1240;
+}
+.fullButtonContainer a.wt:hover{
+    background-color: var(--grey-50);
+}
+.fullButtonContainer a.wt.normal{
+    width: 206px;
+    font-weight: 500;
+}
+.fullButtonContainer a.wt.view{
+    max-width: 363px;
+    font-weight: 500;
+}
+.fullButtonContainer a.wt.booking{
+    width: 425px;
+    font-weight: 500;
+}
+.fullButtonContainer.my{
+    margin-bottom: 80px;
+    
+}
+.fullButtonContainer.bag{
+    padding-bottom: 20px;
+    
+}
+@media all and (max-width : 768px){
+    .fullButtonContainer a.wt.booking{
+        width: 100%;
+    }
+}
+
+
+/* container */
+.inputContainer{
+    width: 100%;
+}
+.inputContainer.login{
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    width: 100%;
+}
+
+/* inputs */
+input{
+    box-sizing: border-box;
+    font-family: var(--fn-suit);
+}
+.inputCaption{
+    margin-bottom: 8px;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 100%; /* 18px */
+    letter-spacing: -0.9px;
+}
+input[type=text], input[type=password]{
+    width: 100%;
+    padding: 24px 12px;
+    color: #000;
+    font-family:  var(--fn-suit);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 100%; /* 18px */
+    border: 0;
+    border-bottom: 1px solid var(--grey-100);
+    box-sizing: border-box;
+}
+input[type=text]::placeholder, input[type=password]::placeholder{
+    color: var(--grey-500);
+    font-family: var(--fn-suit);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 100%; /* 18px */
+}
+input[type=text]:focus, input[type=password]:focus{
+    outline: 0;
+    border-bottom: 1px solid var(--grey-500);
+}
+
+@media all and (max-width : 1024px){
+    input[type=text], input[type=password]{
+        font-size: 14px;
+    }
+    input[type=text]::placeholder, input[type=password]::placeholder{
+        font-size: 14px;
+    }
+    .inputCaption{
+        font-size: 16px;
+    }
+}
+
+.bindingText{
+    display: block;
+    width: 100%;
+    padding: 24px 12px;
+    color: #000;
+    font-family:  var(--fn-suit);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 100%; /* 18px */
+    border: 0;
+    border-bottom: 1px solid var(--grey-100);
+    box-sizing: border-box;
+}
+.fileText{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    padding: 10px 20px;
+    border: 1px solid var(--grey-grey-100, #DBDEE2);
+    background: var(--wh, #FFF);
+    font-size: 14px;
+    margin: 20px 0 16px 0;
+    font-weight: 500;
+    line-height: 100%; /* 18px */
+}
+@media all and (max-width : 1024px){
+    .bindingText{
+        display: block;
+        width: 100%;
+        padding: 24px 12px;
+        color: #000;
+        font-family:  var(--fn-suit);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 100%; /* 18px */
+        border: 0;
+        border-bottom: 1px solid var(--grey-100);
+        box-sizing: border-box;
+    }
+
+}
+
+/* checkbox */
+.checkInputBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 8px;
+    width: 100%;
+    padding: 10px 0;
+}
+input[type=checkbox] {
+    /* display:none; */
+}
+input.checkOnly[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    border-radius: 50%;
+    appearance: none;
+    cursor: pointer;
+    background-image: url('/img/user_img/uncheck-grey.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+}
+input.checkOnly[type="checkbox"]:checked {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-image: url('/img/user_img/checked-grey.png');
+    background-size: 100%;
+    background-position: center center;
+}
+.checkInputBox label{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 100%; /* 14px */
+    letter-spacing: -0.7px;
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background: #666; 
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+@media all and (max-width : 1024px){
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}

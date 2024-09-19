@@ -17,9 +17,9 @@
 
     <title>${param.pageTitle}</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../../../../css/egovframework/pict/reset.css">
-    <link rel="stylesheet" href="../../../../../css/egovframework/pict/layout.css">
-    <link rel="stylesheet" href="../../../../../css/egovframework/pict/contents.css">
+    <link rel="stylesheet" href="/css/user/reset.css">
+    <link rel="stylesheet" href="/css/user/common.css">
+    <link rel="stylesheet" href="/css/user/style.css">
     
     <script src="https://kit.fontawesome.com/13fbf8e9ff.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-315004974"></script>

@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+.userContainer{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+	max-width: 1024px;
+	margin: 0 auto;
+}
+.userContents{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	row-gap: 53px;
+	width: 100%;
+	height: 100%;
+	
+}
+.userContents > p{
+	color: #000;
+	text-align: center;
+	font-size: 36px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 100%; /* 36px */
+	letter-spacing: -1.8px;
+}
+.userContents p span{
+	font-weight: 700;
+}
+
+.ccButton{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	row-gap: 16px;
+	width: 232px;
+	height: 232px;	
+	border-radius: 999px;
+	background: linear-gradient(180deg, #FF7A19 0%, #FFCB11 100%);
+	box-shadow: 0px 0px 15px 0px #DFDFDF;
+	font-family: var(--fn-omni);
+}
+.ccButton::after{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	content: "";
+	display: inline-block;
+	width: 274px;
+	height: 274px;
+    background-image: url('/img/cc-line.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+    animation: rotate 10s linear infinite; /* 10초 동안 선형으로 무한 반복 */
+}
+@keyframes rotate {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+.ccButton span{
+	color: rgba(255, 255, 255, 0.50);
+	text-align: center;
+	font-family: var(--fn-omni);
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 100%; /* 18px */
+	letter-spacing: -0.9px;
+}
+.ccButton p{
+	color: #FFF;
+	text-align: center;
+	font-family: var(--fn-omni);
+	font-size: 36px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 100%; /* 36px */
+	letter-spacing: -1.8px;
+}
+
+
+.userContainer .userContents > p.titleTop2{
+	display: none;
+}
+.userContainer .userContents > p.titleBottom2{
+	display: none;
+}
+
+.userContainer.active{
+	background-color: #000;
+	transition: all .3s;
+}
+.userContainer.active .userContents > p{
+	color: #fff;
+	transition: all .3s;
+}
+.userContainer.active .userContents > p.titleTop1{
+	display: none;
+}
+.userContainer.active .userContents > p.titleTop2{
+	display: block;
+}
+
+
+.userContainer.active .userContents > p.titleBottom1{
+	display: none;
+}
+.userContainer.active .userContents > p.titleBottom2{
+	display: block;
+}
+
+
+.userContainer.active .ccButton{
+	background: linear-gradient(180deg, #6E3BFF 0%, #18C8FF 100%);
+	box-shadow: 0px 4px 24px 0px #3B8EFE;
+	transition: all .3s;
+}
