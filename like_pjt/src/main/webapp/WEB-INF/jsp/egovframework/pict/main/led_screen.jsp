@@ -7,127 +7,159 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<c:import url="../main/header.jsp">
-    	<c:param name="pageTitle" value="2023 메타버스·XR 전문인력 양성 교육"/>
+    	<c:param name="pageTitle" value="스크린"/>
     </c:import>
     <body>
-    	<div class="wrapper">
-   			<%@include file="./navigation.jsp" %>
-	        <main class="container">
-        		<section class="main-box recruit" id="main-recruit">
-        			<div class="main-container">
-        				<h2 class="main-title">
-	        				<span class="desc">2023 메타버스·XR 전문인력 양성 교육</span>
-	        				모집안내
-	        			</h2>
-	        			<div class="main-item">
-	        				<div class="main-recruit">
-	        					<div class="main-recruit-item img">
-	        						<a href="javascript:void(0);" class="main-poster-lnk" title="포스터 크게보기" onclick="poster('open');">
-	        							<img src="../../../../../images/pict/main-poster2.png" alt="">
-	        						</a>
-	        						<a href="https://docs.google.com/forms/d/e/1FAIpQLSfWCMoYCyk1KDMsvNR6P_3czHs4gIEAsGVH2RhJK-qqOCifRw/viewform" target="_blank" title="새창이동" class="recruit-btn mobile">신청하러가기&nbsp;&nbsp;&nbsp;+</a>
-	        					</div>
-	        					<div class="main-recruit-item desc">
-	        						<h3 class="recruit-title">
-	        							모션디자인부터 메타버스제작까지
-	        							<strong class="strong">하나의 교육에서 여러가지 커리큘럼으로</strong>
-        							</h3>
-        							<div class="recruit-desc">
-        								<div></div>
-        								<a href="https://docs.google.com/forms/d/e/1FAIpQLSfWCMoYCyk1KDMsvNR6P_3czHs4gIEAsGVH2RhJK-qqOCifRw/viewform" target="_blank" title="새창이동" class="recruit-btn">신청하러가기&nbsp;&nbsp;&nbsp;+</a>
-        							</div>
-        							
-        							<ul class="recruit-list">
-        								<li>도내 메타버스 기업에서 근무하고 있는 강사진들에게 실무에 바로 투입 될 수 있는 프로그램들을 배워보세요!</li>
-        								<li>또한 우수 교육생에게는 200만원 상당의 취/창업 지원금까지 제공! 강원자치도내 메타버스 기업 모의면접 기회 제공까지!</li>
-        								<li>교육부터 취/창업까지 One-Stop!</li>
-        								<li>지금 바로 신청하세요.</li>
-        							</ul>
-        							 
-	        					</div>
-	        				</div>
-	        			</div>
-        			</div>
-        		</section>
-        		<section class="main-box program" id="main-program">
-        			<div class="main-container">
-        				<h2 class="main-title">
-	        				<span class="desc">2023 메타버스·XR 전문인력 양성 교육</span>
-	        				프로그램안내
-	        			</h2>
-	        			<div class="main-item" style="text-align:center;">
-	        				<img src="../../../../../images/pict/main-program.jpg" alt="" style="max-width:1000px; width:100%;">
-	        			</div>
-        			</div>
-        		</section>
-				<div class="main-poster-layer">
-					<div class="main-poster-layer-box">
-						<div class="main-poster-layer-item">
-							<img src="../../../../../images/pict/main-poster2.png" alt="">
-						</div>
-					</div>
-					<button type="button" title="팝업 닫기" class="main-poster-close" onclick="poster('close');"><i class="fa-solid fa-xmark"></i></button>
-				</div>
-
-        		<section class="main-box ask" id="main-ask">
-        			<div class="main-container">
-        				<h2 class="main-title">
-	        				<span class="desc">2023 강원 메타버스 · XR 전문인력</span>
-	        				문의하기
-	        			</h2>
-	        			<div class="main-item">
-	        				<div class="ask-box">
-	        					<div class="ask-item">
-	        						<h3 class="title">Call</h3>
-	        						<div class="desc"><a href="tel:1644-4845" title="전화걸기">1644-4845</a></div>
-	        					</div>
-	        					<div class="ask-item">
-	        						<h3 class="title">E-mail</h3>
-	        						<div class="desc"><a href="mailto:edu@pict.kr" title="이메일 보내기">edu@pict.kr</a></div>
-	        					</div>
-	        				</div>		
-	        			</div>
-        			</div>
-        		</section>
-
-	        </main>
-	        <script>
-	        	let nIntervId;
-	        	$(document).ready(function(){
-	        		nIntervId = setInterval(bc, 200)
-	        	});
-		        document.addEventListener('keydown', function(event) {
-		    	    // 눌린 키의 코드 값을 가져옵니다
-		    	    if(event.key === 'Space' || event.key === ' '){
-		    	    	clearInterval(nIntervId);
-		    	    }
-		    	});
-				
-				
-				function bc(){
-					var param = {}
-					$.ajax({
-						url : "/get_count.do"
-						, type : "POST"
-						, data : JSON.stringify(param)
-						, contentType : "application/json"
-						, async : false
-						, success : function(data, status, xhr) {
-							var cnt = Number(data.rst.cnt);
-							
-							if(cnt > 10){
-								clearInterval(nIntervId);
-								//여기여 영상 실행
-							}
-						}
-						, error : function(xhr, status, error) {
-							console.log(xhr)
-							console.log("에러")
-						}
-					})
-				}
-	        </script>
-	        <%@include file="./footer.jsp" %>
-        </div>
+	    <div class="warpper">
+	        <div class="gaugeContainer">
+	            <div id="gameArea"></div>
+	            <div class="percent">
+	                <svg width="334" height="240" viewBox="0 0 334 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+	                    <path d="M0.5 -20.5H333.5V165.854L167 239.453L0.5 165.854V-20.5Z" fill="#1149CC" stroke="url(#paint0_linear_3_2225)"/>
+	                    <path d="M10.5 -7.5H323.5V159.022L167 226.456L10.5 159.022V-7.5Z" fill="url(#paint1_linear_3_2225)" stroke="url(#paint2_linear_3_2225)"/>
+	                    <defs>
+	                    <linearGradient id="paint0_linear_3_2225" x1="167" y1="-21" x2="167" y2="290" gradientUnits="userSpaceOnUse">
+	                    <stop stop-color="#0099FF"/>
+	                    <stop offset="1" stop-color="white"/>
+	                    </linearGradient>
+	                    <linearGradient id="paint1_linear_3_2225" x1="167" y1="-8" x2="167" y2="277" gradientUnits="userSpaceOnUse">
+	                    <stop stop-color="white"/>
+	                    <stop offset="1" stop-color="#319FFE"/>
+	                    </linearGradient>
+	                    <linearGradient id="paint2_linear_3_2225" x1="167" y1="-8" x2="167" y2="277" gradientUnits="userSpaceOnUse">
+	                    <stop stop-color="#008AB0"/>
+	                    <stop offset="1" stop-color="#00AEFF"/>
+	                    </linearGradient>
+	                    </defs>
+	                    <rect id="fillRect" x="10.5" y="226.456" width="313" height="0" fill="#AEDCFF"/>
+	                </svg>
+	                <div class="countGauge">
+	                    <div class="gaugeMask"></div>
+	                </div>
+	            </div>
+	            <div class="count">
+	                <span>0</span>%
+	            </div>
+	          	<div class="videoWrapper">
+	          		<video src="/img/test.mp4" type="video/mp4"></video>
+	          	</div>
+	        </div>
+	        <button class="btn">버튼</button>
+	    </div>
+	
+	    <script>
+		    $(document).ready(function() {
+		        var Game = {
+		            init: function(circlesPerClick) {
+		                this.gameArea = $('#gameArea');
+		                this.btn = $('.btn');
+		                this.message = $('#message');
+		                this.countSpan = $('.count span');
+		                this.gaugeMask = $('.gaugeMask');
+		                this.videoWrapper = $('.videoWrapper');
+		                this.video = this.videoWrapper.find('video')[0];
+		                
+		                this.circles = [];
+		                this.gameAreaSize = this.gameArea[0].getBoundingClientRect();
+		                this.circleSize = 200;
+		                this.circlesPerClick = circlesPerClick;
+		                this.maxCircles = 1000;
+		                this.currentCircles = 0;
+		                
+		                this.gaugeMask.height(0);
+		                this.imageUrl = '/img/circle.png';
+	
+		                this.btn.on('click', this.createMultipleCircles.bind(this));
+		            },
+	
+		            createMultipleCircles: function() {
+		                for (var i = 0; i < this.circlesPerClick; i++) {
+		                    this.createCircle();
+		                }
+		            },
+	
+		            createCircle: function() {
+		                if (this.currentCircles >= this.maxCircles) {
+		                    this.endGame();
+		                    return;
+		                }
+	
+		                var circle = $('<img>')
+		                    .addClass('circle')
+		                    .attr('src', this.imageUrl);
+		                
+		                var position = this.getRandomPosition();
+		                circle.css({
+		                    left: position.x + 'px',
+		                    top: position.y + 'px'
+		                });
+		                
+		                this.gameArea.append(circle);
+		                
+		                gsap.fromTo(circle[0], 
+		                    {
+		                        width: 0,
+		                        height: 0,
+		                        y: "-=500",
+		                        opacity: 0
+		                    },
+		                    {
+		                        width: this.circleSize,
+		                        height: this.circleSize,
+		                        y: 0,
+		                        opacity: 1,
+		                        duration: 1,
+		                        ease: "back.out(1.7)",
+		                        onComplete: this.updatePercentage.bind(this)
+		                    }
+		                );
+		                this.currentCircles++;
+		            },
+	
+		            getRandomPosition: function() {
+		                return {
+		                    x: Math.random() * (this.gameAreaSize.width - this.circleSize),
+		                    y: Math.random() * (this.gameAreaSize.height - this.circleSize)
+		                };
+		            },
+	
+		            updatePercentage: function() {
+		                var percentage = Math.min((this.currentCircles / this.maxCircles) * 100, 100);
+		                this.countSpan.text(Math.floor(percentage));
+		                
+		                var minHeight = 2;
+		                var maxHeight = 233;
+		                var maskHeight = Math.max(minHeight, maxHeight * (percentage / 100));
+		                this.gaugeMask.height(maskHeight);
+	
+		                if (percentage >= 100) {
+		                    this.endGame();
+		                }
+		            },
+	
+		            endGame: function() {
+		                this.btn.prop('disabled', true);
+		                if (this.message.length) {
+		                    this.message.show().text('게임 종료!');
+		                }
+		                
+		                // videoWrapper에 active 클래스 추가
+		                this.videoWrapper.addClass('active');
+		                
+		                // 비디오 자동 재생 (소리 포함)
+		                if (this.video) {
+		                    this.video.muted = false; // 소리 켜기
+		                    this.video.play()
+		                        .then(() => {
+		                            console.log("비디오 재생 시작");
+		                        }
+	                        )
+		                }
+		            }
+		        };
+	
+		        Game.init(100);
+		    });	
+	    </script>
     </body>
 </html>

@@ -2,6 +2,8 @@
 
 @import url('https://webfontworld.github.io/sunn/SUIT.css');
 
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&display=swap');
+
 @font-face {
     font-family: '210OmniGothic';
     font-weight: 100;
@@ -59,6 +61,7 @@
 :root {
     --fn-suit: 'SUIT';
     --fn-omni: '210OmniGothic';
+    --fn-ald: "Aldrich", sans-serif;
 }
 
 body{

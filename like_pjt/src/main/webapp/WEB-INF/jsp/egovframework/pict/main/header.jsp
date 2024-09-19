@@ -21,8 +21,7 @@
     <link rel="stylesheet" href="/css/user/common.css">
     <link rel="stylesheet" href="/css/user/style.css">
     
-    <script src="https://kit.fontawesome.com/13fbf8e9ff.js"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-315004974"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
 	
 </head>

@@ -127,3 +127,159 @@
 	box-shadow: 0px 4px 24px 0px #3B8EFE;
 	transition: all .3s;
 }
+
+
+/* 게이지 */
+
+.warpper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+.gaugeContainer {
+    position: relative;
+    width: 2176px;
+    height: 1024px;
+    overflow: hidden;
+    background-image: url(/img/back.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#gameArea {
+    width: 100%;
+    height: 100%;
+}
+.percent {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 2;
+    transform: translateX(-50%);
+    width: 334px;
+    height: 239px;
+    overflow: hidden;
+}
+.countGauge {
+    position: fixed;
+    bottom: -11px;
+    left: 10.5px;
+    width: 313px;
+    height: 249px;
+    background: linear-gradient(180deg, #FFF 0%, #319FFE 121.28%);
+    clip-path: polygon(0% 0%, 100% 0, 100% 63%, 50% 90%, 0 63%);
+    overflow: hidden;
+}
+.gaugeMask {
+    position: absolute;
+    bottom: 22px;
+    left: 0;
+    width: 313px;
+    height: 249px;
+    background: linear-gradient(to top, #AEDCFF, white);
+    transition: height 0.3s ease;
+    overflow: hidden;
+}
+.count {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 5;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--fn-ald);
+    color: #2E25AD;
+    font-size: 50px;
+    font-weight: 400;
+}
+.count span {
+    font-size: 96px;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: -4.8px;
+    background: linear-gradient(180deg, #1DBFFE 0%, #5E58FF 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.circle {
+    position: absolute;
+    object-fit: cover;
+    animation: wobble 5s ease-in-out infinite;
+}
+
+@keyframes wobble {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-5px) scale(0.98); }
+}
+
+.btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: bold;
+}
+.videoWrapper{
+    position: absolute;
+    left: 0;
+    top: 0;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: all .3s;
+}
+.videoWrapper.active{
+	z-index: 10;
+	opacity: 1;
+}
+.videoWrapper video{
+	width: 100%;
+	height: 100%;
+}
+
+.gaugeContainer.mains{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+	flex-direction: column;
+	width: 100%;
+	padding-top: 64px;
+	row-gap: 64px;
+	
+}
+.phoneImgs{
+    display: flex;
+    justify-content: space-between;
+	width: 100%;
+	padding: 0 90px;
+	align-self: flex-end;
+}
+.phoneImg{
+	position: relative;
+	max-width: 585px;
+	width: 100%;
+}
+.phoneImg > img{
+	width: 100%;
+}
+.qrImg{
+    position: absolute;
+    bottom: 82px;
+    left: 50%;
+    transform: translateX(-50%);
+	max-width: 224px;
+}
+.qrImg img{
+	width: 100%;
+}

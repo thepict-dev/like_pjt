@@ -10,15 +10,25 @@
     	<c:param name="pageTitle" value="청년의날 행사"/>
     </c:import>
     <body>
-    	<div class="userContainer">
-    		<div class="userContents">
-    			<h1><span>가운데 버튼</span>을</h1>
-    			<a href="#lnk" class="ccButton">
-    				<span>이곳이에요!</span>
-    				<p>마구마구</p>
-    			</a>
-    			<p>눌러주세요!</p>
-    		</div>
-    	</div>
+	    <div class="warpper">
+	        <div class="gaugeContainer mains">
+	        	<h1><img src="/img/main-title.png" alt=""></h1>
+	        	<div class="phoneImgs">
+	        		<div class="phoneImg">
+	        			<img src="/img/phone.png" alt="">
+	        			<div class="qrImg">
+	        				<img src="/img/qr-test.png" alt="">
+	        			</div>
+        			</div>
+	        		<div class="phoneImg">
+	        			<img src="/img/phone.png" alt="">
+	        			<div class="qrImg">
+	        				<img src="/img/qr-test.png" alt="">
+	        			</div>
+        			</div>
+	        	</div>
+	        </div>
+        </div>
+	
     </body>
 </html>
