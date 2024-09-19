@@ -48,7 +48,39 @@
 	    </div>
 	
 	    <script>
+	    	let intervalCount;
+	    	
+	    	function getCount(){
+	    		var param = {}
+				$.ajax({
+					url : "/get_count.do"
+					, type : "POST"
+					, data : JSON.stringify(param)
+					, contentType : "application/json"
+					, async : false
+					, success : function(data, status, xhr) {
+						var cnt = Number(data.rst.cnt);
+						
+						if(cnt > 1000){
+							clearInterval(intervalCount);
+							//여기여 영상 실행
+						}
+					}
+					, error : function(xhr, status, error) {
+						console.log(xhr)
+						console.log("에러")
+					}
+				})
+	    	}
 		    $(document).ready(function() {
+		    	intervalCount = setInterval(getCount, 100);
+		    	 document.addEventListener('keydown', function(event) {
+		    	    // 눌린 키의 코드 값을 가져옵니다
+		    	    if(event.key === 'Space' || event.key === ' '){
+		    	    	clearInterval(intervalCount);
+		    	    }
+		    	});
+		    	
 		        var Game = {
 		            init: function(circlesPerClick) {
 		                this.gameArea = $('#gameArea');
