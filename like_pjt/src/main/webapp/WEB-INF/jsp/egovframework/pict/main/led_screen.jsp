@@ -98,15 +98,7 @@
 	        	});
 		        document.addEventListener('keydown', function(event) {
 		    	    // 눌린 키의 코드 값을 가져옵니다
-		    	    if (event.key === 'p' || event.key === 'P') {
-		    	    	console.log("P함수")
-		    	       ab()
-		    	    }
-		    	    if (event.key === 'o' || event.key === 'O') {
-		    	    	console.log("P함수")
-						bc()
-		    	    }
-		    	    if(event.key === 'y' || event.key === 'Y'){
+		    	    if(event.key === 'Space' || event.key === ' '){
 		    	    	clearInterval(nIntervId);
 		    	    }
 		    	});
@@ -114,7 +106,6 @@
 				
 				function bc(){
 					var param = {}
-
 					$.ajax({
 						url : "/get_count.do"
 						, type : "POST"
@@ -122,7 +113,12 @@
 						, contentType : "application/json"
 						, async : false
 						, success : function(data, status, xhr) {
-							console.log(data)
+							var cnt = Number(data.rst.cnt);
+							
+							if(cnt > 10){
+								clearInterval(nIntervId);
+								//여기여 영상 실행
+							}
 						}
 						, error : function(xhr, status, error) {
 							console.log(xhr)
