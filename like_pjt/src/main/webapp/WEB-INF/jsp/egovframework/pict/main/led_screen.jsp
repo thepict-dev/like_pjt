@@ -48,34 +48,40 @@
 	    </div>
 	
 	    <script>
-	    	let intervalCount;
-	    	var current_cnt = 0;
-	    	function getCount(){
-	    		var param = {}
-				$.ajax({
-					url : "/get_count.do"
-					, type : "POST"
-					, data : JSON.stringify(param)
-					, contentType : "application/json"
-					, async : false
-					, success : function(data, status, xhr) {
-						var cnt = Number(data.rst.cnt);
-						current_cnt = cnt;
-						console.log(cnt)
-						if(cnt > 1000){
-							clearInterval(intervalCount);
-							//여기여 영상 실행
-						}
-					}
-					, error : function(xhr, status, error) {
-						console.log(xhr)
-						console.log("에러")
-					}
-				})
-	    	}
 		    $(document).ready(function() {
-		    	intervalCount = setInterval(getCount, 100);
-		    	 document.addEventListener('keydown', function(event) {
+		    	let intervalCount;
+		    	var origin_cnt = 0;
+		    	var current_cnt = 0;
+		    	function getCount(){
+		    		
+		    		var param = {}
+					$.ajax({
+						url : "/get_count.do"
+						, type : "POST"
+						, data : JSON.stringify(param)
+						, contentType : "application/json"
+						, async : false
+						, success : function(data, status, xhr) {
+							var cnt = Number(data.rst.cnt);
+							current_cnt = cnt;
+							if(current_cnt != origin_cnt){
+								Game.createMultipleCircles()
+							}
+							origin_cnt = current_cnt
+							if(cnt > 100){
+								clearInterval(intervalCount);
+								//여기여 영상 실행
+							}
+						}
+						, error : function(xhr, status, error) {
+							console.log(xhr)
+							console.log("에러")
+						}
+					})
+		    	}
+		    	
+		    	intervalCount = setInterval(getCount, 1000);
+		    	document.addEventListener('keydown', function(event) {
 		    	    // 눌린 키의 코드 값을 가져옵니다
 		    	    if(event.key === 'Space' || event.key === ' '){
 		    	    	clearInterval(intervalCount);
@@ -97,7 +103,7 @@
 		                this.gameAreaSize = this.gameArea[0].getBoundingClientRect();
 		                this.circleSize = 200;
 		                this.circlesPerClick = circlesPerClick;
-		                this.maxCircles = 1000;
+		                this.maxCircles = 100;
 		                this.currentCircles = 0;
 		                
 		                this.gaugeMask.height(0);
@@ -107,18 +113,13 @@
 	
 		            createMultipleCircles: function() {
 		            	console.log('1111')
-		                if(current_cnt < 1000){
+		                if(current_cnt <= 100){
 		                	console.log('2222')
 		            		this.createCircle();
 		                }
 		            },
 	
 		            createCircle: function() {
-		                if (current_cnt >= this.maxCircles) {
-		                    this.endGame();
-		                    return;
-		                }
-	
 		                var circle = $('<img>')
 		                    .addClass('circle')
 		                    .attr('src', this.imageUrl);
@@ -148,6 +149,10 @@
 		                        onComplete: this.updatePercentage.bind(this)
 		                    }
 		                );
+		                if (current_cnt >= this.maxCircles) {
+		                    this.endGame();
+		                    return;
+		                }
 		                this.currentCircles++;
 		            },
 	
@@ -160,7 +165,7 @@
 	
 		            updatePercentage: function() {
 		            	console.log("ggogogo" + current_cnt)
-		                var percentage = Math.min((this.currentCircles / this.maxCircles) * 100, 100);
+		                var percentage = Math.min((current_cnt / this.maxCircles) * 100, 100);
 		                this.countSpan.text(Math.floor(percentage));
 		                
 		                var minHeight = 2;
@@ -194,7 +199,7 @@
 		            }
 		        };
 	
-		        Game.init(100);
+		        Game.init(1);
 		    });	
 	    </script>
     </body>
