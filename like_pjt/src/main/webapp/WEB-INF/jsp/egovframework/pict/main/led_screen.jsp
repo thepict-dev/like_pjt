@@ -103,7 +103,7 @@
 		                this.gameAreaSize = this.gameArea[0].getBoundingClientRect();
 		                this.circleSize = 200;
 		                this.circlesPerClick = 1;
-		                this.maxCircles = 200;
+		                this.maxCircles = 150;
 		                this.currentCircles = 0;
 		                this.gameEnded = false;
 		                
@@ -114,7 +114,7 @@
 	
 		            createMultipleCircles: function() {
 		                for (let i = 0; i < this.circlesPerClick; i++) {
-		                    if (current_cnt <= 500 && !this.gameEnded) {
+		                    if (current_cnt <= 1000 && !this.gameEnded) {
 		                        this.createCircle();
 		                    }
 		                }
@@ -176,9 +176,9 @@
 	
 		            fillToMax: function() {
 		                if (!this.gameEnded) {
-		                    current_cnt = 500;
+		                    current_cnt = 1000;
 		                    this.updatePercentage();
-		                    for (let i = this.currentCircles; i < 500; i++) {
+		                    for (let i = this.currentCircles; i < 1000; i++) {
 		                        this.createCircle();
 		                    }
 		                    this.endGame();
