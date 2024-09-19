@@ -17,6 +17,12 @@
         <property name="webBindingInitializer">
             <bean class="egovframework.example.cmmn.web.EgovBindingInitializer"/>
         </property>
+        <!-- 데이터주고받을때 UTF-8 적용안되서 넣음 -->
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
     </bean>
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
         <property name="interceptors">

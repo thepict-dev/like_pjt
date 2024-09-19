@@ -216,6 +216,17 @@ public class PictServiceImpl extends EgovAbstractServiceImpl implements PictServ
 		
 	}
 
+	@Override
+	public void person_click(PictVO pictVO) throws Exception {
+
+		pictMapper.person_click(pictVO);
+	}
+
+	@Override
+	public PictVO led_select(PictVO pictVO) throws Exception {
+		return pictMapper.led_select(pictVO);
+	}
+
 //	@Override
 //	public void attendance_update(PictVO pictVO) throws Exception {
 //		pictMapper.attendance_update(pictVO);

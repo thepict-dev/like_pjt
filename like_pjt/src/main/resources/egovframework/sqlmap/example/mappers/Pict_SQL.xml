@@ -228,5 +228,14 @@
 	</delete>
 	
 	
+	<insert id="person_click" parameterType="pictVO">
+		insert into test_table(reg_date)
+		values(now())
+	</insert>
+	
+	<select id="led_select" resultType="pictVO">
+		select count(idx) as cnt from test_table
+	</select>
+	
 	
 </mapper>

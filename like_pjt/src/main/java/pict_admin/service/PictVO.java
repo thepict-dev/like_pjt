@@ -110,9 +110,15 @@ public class PictVO extends PictDefaultVO {
 	private String board_type;
 	private String news;
 	private String reg_date_for;
+	private String cnt;
 	
 	
-	
+	public String getCnt() {
+		return cnt;
+	}
+	public void setCnt(String cnt) {
+		this.cnt = cnt;
+	}
 	public String getReg_date_for() {
 		return reg_date_for;
 	}

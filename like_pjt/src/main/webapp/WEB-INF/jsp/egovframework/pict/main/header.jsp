@@ -24,5 +24,5 @@
     <script src="https://kit.fontawesome.com/13fbf8e9ff.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-315004974"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="../../../../../js/contents.js"></script>
+	
 </head>

@@ -96,6 +96,10 @@ public interface PictMapper {
 
 	void board_delete(PictVO pictVO) throws Exception;
 
+	void person_click(PictVO pictVO) throws Exception;
+
+	PictVO led_select(PictVO pictVO) throws Exception;
+
 	//void attendance_update(PictVO pictVO) throws Exception;
 
 
