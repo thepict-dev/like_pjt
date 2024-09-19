@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pict_admin.service.impl.PictMapper">
+	<select id="api_get_badge" resultType="pictVO">
+		select v.key_id, v.user_id, i.title, i.content, v.reg_date 
+		from inventory_table v 
+		join item_table i on v.key_id = i.id 
+		join user_table u on v.user_id = u.id 
+		where u.id = #{user_id} and type = #{type}
+	</select>
+	
+	<select id="api_get_coin" resultType="pictVO">
+		select v.key_id, v.user_id, i.title, i.content,  c.coin_text, v.reg_date
+		from inventory_table v
+		left outer join item_table i on v.key_id = i.id
+		left outer join user_table u on v.user_id = u.id
+		left outer join coin_table c on v.key_id = c.coin_id
+		where u.id = #{user_id} and type = #{type}  
+	</select>
+	
+	<select id="api_get_avata" resultType="pictVO">
+		select u.name, a.user_id, a.position_x, a.position_y, a.position_z, a.rotation_x, a.rotation_y, a.rotation_z, c.cloth_id, f.face_id, h.hair_id, s.shoes_id, a.body
+		from avata_table a 
+		left outer join user_table u on a.user_id = u.id 
+		left outer join cloth_table c on a.cloth = c.cloth_id 
+		left outer join face_table f on a.face = f.face_id 
+		left outer join hair_table h on a.hair = h.hair_id 
+		left outer join shoes_table s on a.shoes = s.shoes_id 
+		where a.user_id = #{user_id}
+	</select>
+
+	<insert id="insert_avata" parameterType="pictVO">
+	INSERT INTO avata_table
+		(
+		 user_id, position_x, position_y, position_z, rotation_x, rotation_y, rotation_z, cloth, face, hair, shoes, body, reg_date
+		)
+	VALUES (
+		 #{user_id}, #{position_x}, #{position_y}, #{position_z}, #{rotation_x}, #{rotation_y}, #{rotation_z}, #{cloth}, #{face}, #{hair}, #{shoes}, #{body}, now() 
+		  )
+	</insert>
+	
+	<update id="update_avata">
+		update avata_table set
+			position_x = #{position_x},
+			position_y = #{position_y},
+			position_z = #{position_z},
+			rotation_x = #{rotation_x},
+			rotation_y = #{rotation_y},
+			rotation_z = #{rotation_z},
+			cloth = #{cloth},
+			face = #{face},
+			hair = #{hair},
+			shoes = #{shoes},
+			body = #{body},
+			reg_date = now()			
+		where user_id = #{user_id}
+		
+	</update>
+	
+	<select id="api_lecture_list" resultType="pictVO">
+		SELECT
+			idx, title, name, link_url, reg_date, use_at
+		FROM lecture_table
+		where 1=1
+		and use_at = "Y"
+		order by reg_date desc
+	</select>
+	
+	<select id="attendance_select_one" resultType="pictVO">
+		SELECT *
+		FROM attendance_table
+		where 1=1
+		and lecture_id = #{lecture_id}
+		and std_num = #{std_num}
+		and week_count = #{week_count}
+		and week_cha = #{week_cha}
+		order by idx desc
+		limit 1
+	</select>
+	
+	<insert id="attendance_save" parameterType="pictVO">
+		INSERT INTO attendance_table
+			(
+			 lecture_id, name, in_date, out_date, std_num, week_cha, week_count, title
+			)
+		VALUES (
+			 #{lecture_id}, #{name}, #{in_date}, #{out_date}, #{std_num}, #{week_cha}, #{week_count}, #{title}
+			  )
+	</insert>
+	
+	<update id="attendance_save_update">
+		update attendance_table set
+			out_date = #{out_date}
+		where lecture_id = #{lecture_id}
+		and week_count = #{week_count}
+		and week_cha = #{week_cha}
+		
+	</update>
+	
+	
+</mapper>

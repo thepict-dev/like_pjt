@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pict_admin.service.impl.AdminMapper">
+	
+	<select id="get_user_info" resultType="adminVO">
+		SELECT 
+			*
+		FROM user_info
+		WHERE id = #{adminId}
+	</select>
+	
+	<update id="update_user" parameterType="adminVO">
+		update user_info
+		set name =#{name}, mobile=#{mobile}, depart=#{depart}
+		where id = #{id}
+	</update>
+	
+	<insert id="insert_user" parameterType="adminVO">
+		INSERT INTO user_info
+			(
+			 id, password, name, depart, mobile, last_login_date, reg_date, use_at
+			)
+		VALUES (
+			 #{id}, #{password}, #{name}, #{depart}, #{mobile}, #{last_login_date}, now(), 'Y'
+			  )
+	</insert>
+	
+	<select id="user_select_one" resultType="adminVO">
+		SELECT 
+			*
+		FROM user_info
+		where 1=1
+		and id =#{id}
+	</select>
+	
+	<select id="user_list" resultType="adminVO">
+		SELECT 
+			*
+		FROM user_info
+		where 1=1
+		and use_at = "Y"
+
+		<if test="search_text != null and search_text != '' ">
+			and (
+				id LIKE CONCAT('%', #{search_text}, '%') or
+				name LIKE CONCAT('%', #{search_text}, '%') or
+				mobile LIKE CONCAT('%', #{search_text}, '%') or
+				depart LIKE CONCAT('%', #{search_text}, '%')
+			) 
+		</if>
+		
+		order by reg_date
+	</select>
+	
+	<update id="user_reset">
+		UPDATE user_info
+		SET password=#{password}
+		  WHERE ID=#{id}
+	</update>
+	
+	<update id="insert_login_info">
+		UPDATE user_info
+		SET last_login_ip =#{last_login_ip}, last_login_date =#{last_login_date}
+		WHERE ID=#{id};
+		
+		select * from user_info
+		where id = #{id}
+	</update>
+	
+	<update id="user_delete">
+		UPDATE user_info
+		SET use_at = "N"
+		WHERE ID=#{id}
+	</update>
+	
+	
+	
+	
+</mapper>
