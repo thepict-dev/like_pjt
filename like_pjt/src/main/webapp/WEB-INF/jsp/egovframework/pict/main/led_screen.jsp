@@ -193,12 +193,13 @@
 		                this.videoWrapper.addClass('active');
 		                
 		                if (this.video) {
-		                    this.video.muted = true; // 음소거 해제
+		                    this.video.muted = true; // 음소거 상태로 시작
 		                    var playPromise = this.video.play();
 		                    
 		                    if (playPromise !== undefined) {
 		                        playPromise.then(() => {
-		                            console.log("비디오 재생 시작 (소리 포함)");
+		                            console.log("비디오 재생 시작 (음소거)");
+		                            this.addUnmuteListener();
 		                        }).catch(error => {
 		                            console.error("비디오 재생 실패:", error);
 		                        });
@@ -206,15 +207,14 @@
 		                }
 		            },
 	
-		            showPlayButton: function() {
-		                var playButton = $('<button>').text('영상 재생').addClass('play-button');
-		                this.videoWrapper.append(playButton);
-		                playButton.on('click', () => {
-		                    this.video.muted = false;
-		                    this.video.play();
-		                    playButton.remove();
+		            addUnmuteListener: function() {
+		                $(document).one('click', () => {
+		                    if (this.video) {
+		                        this.video.muted = false;
+		                        console.log("음소거 해제");
+		                    }
 		                });
-		            }
+		            },
 		        };
 	
 		        Game.init();
