@@ -105,6 +105,7 @@
 		                this.circlesPerClick = 1;
 		                this.maxCircles = 500;
 		                this.currentCircles = 0;
+		                this.gameEnded = false;
 		                
 		                this.gaugeMask.height(0);
 		                this.imageUrl = '/img/circle.png';
@@ -113,7 +114,7 @@
 	
 		            createMultipleCircles: function() {
 		                for (let i = 0; i < this.circlesPerClick; i++) {
-		                    if (current_cnt <= 500) {
+		                    if (current_cnt <= 500 && !this.gameEnded) {
 		                        this.createCircle();
 		                    }
 		                }
@@ -149,10 +150,6 @@
 		                        onComplete: this.updatePercentage.bind(this)
 		                    }
 		                );
-		                if (current_cnt >= this.maxCircles) {
-		                    this.endGame();
-		                    return;
-		                }
 		                this.currentCircles++;
 		            },
 	
@@ -172,38 +169,38 @@
 		                var maskHeight = Math.max(minHeight, maxHeight * (percentage / 100));
 		                this.gaugeMask.height(maskHeight);
 	
-		                if (percentage >= 100) {
+		                if (percentage >= 100 && !this.gameEnded) {
 		                    this.endGame();
 		                }
 		            },
 	
 		            fillToMax: function() {
-		                current_cnt = 500;
-		                this.updatePercentage();
-		                for (let i = 0; i < 500; i++) {
-		                    this.createCircle();
+		                if (!this.gameEnded) {
+		                    current_cnt = 500;
+		                    this.updatePercentage();
+		                    for (let i = this.currentCircles; i < 500; i++) {
+		                        this.createCircle();
+		                    }
+		                    this.endGame();
 		                }
-		                this.endGame();
 		            },
 	
 		            endGame: function() {
+		                if (this.gameEnded) return;
+		                this.gameEnded = true;
+		                console.log("Game ended");
 		                this.btn.prop('disabled', true);
 		                this.videoWrapper.addClass('active');
 		                
 		                if (this.video) {
-		                    this.video.muted = true;
+		                    this.video.muted = false; // 음소거 해제
 		                    var playPromise = this.video.play();
 		                    
 		                    if (playPromise !== undefined) {
 		                        playPromise.then(() => {
-		                            console.log("비디오 재생 시작 (음소거)");
-		                            $(document).one('click', () => {
-		                                this.video.muted = false;
-		                                console.log("비디오 소리 켜짐");
-		                            });
+		                            console.log("비디오 재생 시작 (소리 포함)");
 		                        }).catch(error => {
 		                            console.error("비디오 재생 실패:", error);
-		                            this.showPlayButton();
 		                        });
 		                    }
 		                }
