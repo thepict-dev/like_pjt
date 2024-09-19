@@ -193,7 +193,7 @@
 		                this.videoWrapper.addClass('active');
 		                
 		                if (this.video) {
-		                    this.video.muted = false; // 음소거 해제
+		                    this.video.muted = true; // 음소거 해제
 		                    var playPromise = this.video.play();
 		                    
 		                    if (playPromise !== undefined) {
