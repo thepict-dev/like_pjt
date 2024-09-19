@@ -67,7 +67,7 @@
 		                        Game.createMultipleCircles()
 		                    }
 		                    origin_cnt = current_cnt
-		                    if(cnt >= 500){
+		                    if(cnt >= 1000){
 		                        clearInterval(intervalCount);
 		                        Game.endGame();
 		                    }
@@ -161,7 +161,7 @@
 		            },
 	
 		            updatePercentage: function() {
-		                var percentage = Math.floor((current_cnt / 500) * 100);
+		                var percentage = Math.floor((current_cnt / 1000) * 100);
 		                this.countSpan.text(Math.floor(percentage));
 		                
 		                var minHeight = 2;
@@ -178,7 +178,7 @@
 		                if (!this.gameEnded) {
 		                    current_cnt = 1000;
 		                    this.updatePercentage();
-		                    for (let i = this.currentCircles; i < 1000; i++) {
+		                    for (let i = this.currentCircles; i < 150; i++) {
 		                        this.createCircle();
 		                    }
 		                    this.endGame();
