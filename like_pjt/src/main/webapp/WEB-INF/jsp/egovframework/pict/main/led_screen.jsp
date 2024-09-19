@@ -49,7 +49,7 @@
 	
 	    <script>
 	    	let intervalCount;
-	    	
+	    	var current_cnt = 0;
 	    	function getCount(){
 	    		var param = {}
 				$.ajax({
@@ -60,7 +60,8 @@
 					, async : false
 					, success : function(data, status, xhr) {
 						var cnt = Number(data.rst.cnt);
-						
+						current_cnt = cnt;
+						console.log(cnt)
 						if(cnt > 1000){
 							clearInterval(intervalCount);
 							//여기여 영상 실행
@@ -83,6 +84,7 @@
 		    	
 		        var Game = {
 		            init: function(circlesPerClick) {
+		            	console.log("ok?")
 		                this.gameArea = $('#gameArea');
 		                this.btn = $('.btn');
 		                this.message = $('#message');
@@ -100,18 +102,19 @@
 		                
 		                this.gaugeMask.height(0);
 		                this.imageUrl = '/img/circle.png';
-	
-		                this.btn.on('click', this.createMultipleCircles.bind(this));
+						this.createMultipleCircles(this)
 		            },
 	
 		            createMultipleCircles: function() {
-		                for (var i = 0; i < this.circlesPerClick; i++) {
-		                    this.createCircle();
+		            	console.log('1111')
+		                if(current_cnt < 1000){
+		                	console.log('2222')
+		            		this.createCircle();
 		                }
 		            },
 	
 		            createCircle: function() {
-		                if (this.currentCircles >= this.maxCircles) {
+		                if (current_cnt >= this.maxCircles) {
 		                    this.endGame();
 		                    return;
 		                }
@@ -156,6 +159,7 @@
 		            },
 	
 		            updatePercentage: function() {
+		            	console.log("ggogogo" + current_cnt)
 		                var percentage = Math.min((this.currentCircles / this.maxCircles) * 100, 100);
 		                this.countSpan.text(Math.floor(percentage));
 		                
