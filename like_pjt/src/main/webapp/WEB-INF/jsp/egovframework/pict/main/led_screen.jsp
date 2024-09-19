@@ -67,7 +67,7 @@
 		                        Game.createMultipleCircles()
 		                    }
 		                    origin_cnt = current_cnt
-		                    if(cnt > 100){
+		                    if(cnt >= 500){
 		                        clearInterval(intervalCount);
 		                        Game.endGame();
 		                    }
@@ -79,7 +79,7 @@
 		            })
 		        }
 		        
-		        intervalCount = setInterval(getCount, 1000);
+		        intervalCount = setInterval(getCount, 200);
 		        
 		        document.addEventListener('keydown', function(event) {
 		            if(event.key === ' ' || event.code === 'Space'){
@@ -102,8 +102,8 @@
 		                this.circles = [];
 		                this.gameAreaSize = this.gameArea[0].getBoundingClientRect();
 		                this.circleSize = 200;
-		                this.circlesPerClick = 5;
-		                this.maxCircles = 100;
+		                this.circlesPerClick = 1;
+		                this.maxCircles = 500;
 		                this.currentCircles = 0;
 		                
 		                this.gaugeMask.height(0);
@@ -113,7 +113,7 @@
 	
 		            createMultipleCircles: function() {
 		                for (let i = 0; i < this.circlesPerClick; i++) {
-		                    if (current_cnt <= 100) {
+		                    if (current_cnt <= 500) {
 		                        this.createCircle();
 		                    }
 		                }
@@ -178,9 +178,9 @@
 		            },
 	
 		            fillToMax: function() {
-		                current_cnt = 100;
+		                current_cnt = 500;
 		                this.updatePercentage();
-		                for (let i = 0; i < 100; i++) {
+		                for (let i = 0; i < 500; i++) {
 		                    this.createCircle();
 		                }
 		                this.endGame();
