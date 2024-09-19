@@ -48,178 +48,180 @@
 	    </div>
 	
 	    <script>
-	    $(document).ready(function() {
-	        let intervalCount;
-	        var origin_cnt = 0;
-	        var current_cnt = 0;
-	        function getCount(){
-	            var param = {}
-	            $.ajax({
-	                url : "/get_count.do"
-	                , type : "POST"
-	                , data : JSON.stringify(param)
-	                , contentType : "application/json"
-	                , async : false
-	                , success : function(data, status, xhr) {
-	                    var cnt = Number(data.rst.cnt);
-	                    current_cnt = cnt;
-	                    if(current_cnt != origin_cnt){
-	                        Game.createMultipleCircles()
-	                    }
-	                    origin_cnt = current_cnt
-	                    if(cnt > 100){
-	                        clearInterval(intervalCount);
-	                        //여기서 영상 실행
-	                        Game.endGame();
-	                    }
-	                }
-	                , error : function(xhr, status, error) {
-	                    console.log(xhr)
-	                    console.log("에러")
-	                }
-	            })
-	        }
-	        
-	        intervalCount = setInterval(getCount, 1000);
-	        document.addEventListener('keydown', function(event) {
-	            if(event.key === 'Space' || event.key === ' '){
-	                clearInterval(intervalCount);
-	            }
-	        });
-	        
-	        var Game = {
-	            init: function(circlesPerClick) {
-	                console.log("Game initialized")
-	                this.gameArea = $('#gameArea');
-	                this.btn = $('.btn');
-	                this.message = $('#message');
-	                this.countSpan = $('.count span');
-	                this.gaugeMask = $('.gaugeMask');
-	                this.videoWrapper = $('.videoWrapper');
-	                this.video = this.videoWrapper.find('video')[0];
-	                
-	                this.circles = [];
-	                this.gameAreaSize = this.gameArea[0].getBoundingClientRect();
-	                this.circleSize = 200;
-	                this.circlesPerClick = 5;
-	                this.maxCircles = 100;
-	                this.currentCircles = 0;
-	                
-	                this.gaugeMask.height(0);
-	                this.imageUrl = '/img/circle.png';
-	                this.createMultipleCircles()
-	            },
-
-	            createMultipleCircles: function() {
-	                for (let i = 0; i < this.circlesPerClick; i++) {
-	                    if (current_cnt <= 100) {
-	                        this.createCircle();
-	                    }
-	                }
-	            },
-
-	            createCircle: function() {
-	                var circle = $('<img>')
-	                    .addClass('circle')
-	                    .attr('src', this.imageUrl);
-	                
-	                var position = this.getRandomPosition();
-	                circle.css({
-	                    left: position.x + 'px',
-	                    top: position.y + 'px'
-	                });
-	                
-	                this.gameArea.append(circle);
-	                
-	                gsap.fromTo(circle[0], 
-	                    {
-	                        width: 0,
-	                        height: 0,
-	                        y: "-=500",
-	                        opacity: 0
-	                    },
-	                    {
-	                        width: this.circleSize,
-	                        height: this.circleSize,
-	                        y: 0,
-	                        opacity: 1,
-	                        duration: 1,
-	                        ease: "back.out(1.7)",
-	                        onComplete: this.updatePercentage.bind(this)
-	                    }
-	                );
-	                if (current_cnt >= this.maxCircles) {
-	                    this.endGame();
-	                    return;
-	                }
-	                this.currentCircles++;
-	            },
-
-	            getRandomPosition: function() {
-	                return {
-	                    x: Math.random() * (this.gameAreaSize.width - this.circleSize),
-	                    y: Math.random() * (this.gameAreaSize.height - this.circleSize)
-	                };
-	            },
-
-	            updatePercentage: function() {
-	                console.log("Updating percentage: " + current_cnt)
-	                var percentage = Math.min((current_cnt / this.maxCircles) * 100, 100);
-	                this.countSpan.text(Math.floor(percentage));
-	                
-	                var minHeight = 2;
-	                var maxHeight = 233;
-	                var maskHeight = Math.max(minHeight, maxHeight * (percentage / 100));
-	                this.gaugeMask.height(maskHeight);
-
-	                if (percentage >= 100) {
-	                    this.endGame();
-	                }
-	            },
-
-	            endGame: function() {
-	                console.log("Game ended")
-	                this.btn.prop('disabled', true);
-	                if (this.message.length) {
-	                    this.message.show().text('게임 종료!');
-	                }
-	                
-	                // videoWrapper에 active 클래스 추가
-	                this.videoWrapper.addClass('active');
-	                
-	                // 비디오 자동 재생 (처음에는 음소거로 시작)
-	                if (this.video) {
-	                    this.video.muted = true; // 처음에는 음소거
-	                    var playPromise = this.video.play();
-	                    
-	                    if (playPromise !== undefined) {
-	                        playPromise.then(() => {
-	                            console.log("비디오 재생 시작 (음소거)");
-	                            $(document).one('click', () => {
-	                                this.video.muted = false;
-	                                console.log("비디오 소리 켜짐");
-	                            });
-	                        }).catch(error => {
-	                            console.error("비디오 재생 실패:", error);
-	                            this.showPlayButton();
-	                        });
-	                    }
-	                }
-	            },
-
-	            showPlayButton: function() {
-	                var playButton = $('<button>').text('영상 재생').addClass('play-button');
-	                this.videoWrapper.append(playButton);
-	                playButton.on('click', () => {
-	                    this.video.muted = false;
-	                    this.video.play();
-	                    playButton.remove();
-	                });
-	            }
-	        };
-
-	        Game.init();
-	    });
+		    $(document).ready(function() {
+		        let intervalCount;
+		        var origin_cnt = 0;
+		        var current_cnt = 0;
+		        function getCount(){
+		            var param = {}
+		            $.ajax({
+		                url : "/get_count.do"
+		                , type : "POST"
+		                , data : JSON.stringify(param)
+		                , contentType : "application/json"
+		                , async : false
+		                , success : function(data, status, xhr) {
+		                    var cnt = Number(data.rst.cnt);
+		                    current_cnt = cnt;
+		                    if(current_cnt != origin_cnt){
+		                        Game.createMultipleCircles()
+		                    }
+		                    origin_cnt = current_cnt
+		                    if(cnt > 100){
+		                        clearInterval(intervalCount);
+		                        Game.endGame();
+		                    }
+		                }
+		                , error : function(xhr, status, error) {
+		                    console.log(xhr)
+		                    console.log("에러")
+		                }
+		            })
+		        }
+		        
+		        intervalCount = setInterval(getCount, 1000);
+		        
+		        document.addEventListener('keydown', function(event) {
+		            if(event.key === ' ' || event.code === 'Space'){
+		                clearInterval(intervalCount);
+		                Game.fillToMax();
+		            }
+		        });
+		        
+		        var Game = {
+		            init: function() {
+		                console.log("Game initialized")
+		                this.gameArea = $('#gameArea');
+		                this.btn = $('.btn');
+		                this.message = $('#message');
+		                this.countSpan = $('.count span');
+		                this.gaugeMask = $('.gaugeMask');
+		                this.videoWrapper = $('.videoWrapper');
+		                this.video = this.videoWrapper.find('video')[0];
+		                
+		                this.circles = [];
+		                this.gameAreaSize = this.gameArea[0].getBoundingClientRect();
+		                this.circleSize = 200;
+		                this.circlesPerClick = 5;
+		                this.maxCircles = 100;
+		                this.currentCircles = 0;
+		                
+		                this.gaugeMask.height(0);
+		                this.imageUrl = '/img/circle.png';
+		                this.createMultipleCircles()
+		            },
+	
+		            createMultipleCircles: function() {
+		                for (let i = 0; i < this.circlesPerClick; i++) {
+		                    if (current_cnt <= 100) {
+		                        this.createCircle();
+		                    }
+		                }
+		            },
+	
+		            createCircle: function() {
+		                var circle = $('<img>')
+		                    .addClass('circle')
+		                    .attr('src', this.imageUrl);
+		                
+		                var position = this.getRandomPosition();
+		                circle.css({
+		                    left: position.x + 'px',
+		                    top: position.y + 'px'
+		                });
+		                
+		                this.gameArea.append(circle);
+		                
+		                gsap.fromTo(circle[0], 
+		                    {
+		                        width: 0,
+		                        height: 0,
+		                        y: "-=500",
+		                        opacity: 0
+		                    },
+		                    {
+		                        width: this.circleSize,
+		                        height: this.circleSize,
+		                        y: 0,
+		                        opacity: 1,
+		                        duration: 1,
+		                        ease: "back.out(1.7)",
+		                        onComplete: this.updatePercentage.bind(this)
+		                    }
+		                );
+		                if (current_cnt >= this.maxCircles) {
+		                    this.endGame();
+		                    return;
+		                }
+		                this.currentCircles++;
+		            },
+	
+		            getRandomPosition: function() {
+		                return {
+		                    x: Math.random() * (this.gameAreaSize.width - this.circleSize),
+		                    y: Math.random() * (this.gameAreaSize.height - this.circleSize)
+		                };
+		            },
+	
+		            updatePercentage: function() {
+		                var percentage = Math.min((current_cnt / this.maxCircles) * 100, 100);
+		                this.countSpan.text(Math.floor(percentage));
+		                
+		                var minHeight = 2;
+		                var maxHeight = 233;
+		                var maskHeight = Math.max(minHeight, maxHeight * (percentage / 100));
+		                this.gaugeMask.height(maskHeight);
+	
+		                if (percentage >= 100) {
+		                    this.endGame();
+		                }
+		            },
+	
+		            fillToMax: function() {
+		                current_cnt = 100;
+		                this.updatePercentage();
+		                for (let i = 0; i < 100; i++) {
+		                    this.createCircle();
+		                }
+		                this.endGame();
+		            },
+	
+		            endGame: function() {
+		                this.btn.prop('disabled', true);
+		                this.videoWrapper.addClass('active');
+		                
+		                if (this.video) {
+		                    this.video.muted = true;
+		                    var playPromise = this.video.play();
+		                    
+		                    if (playPromise !== undefined) {
+		                        playPromise.then(() => {
+		                            console.log("비디오 재생 시작 (음소거)");
+		                            $(document).one('click', () => {
+		                                this.video.muted = false;
+		                                console.log("비디오 소리 켜짐");
+		                            });
+		                        }).catch(error => {
+		                            console.error("비디오 재생 실패:", error);
+		                            this.showPlayButton();
+		                        });
+		                    }
+		                }
+		            },
+	
+		            showPlayButton: function() {
+		                var playButton = $('<button>').text('영상 재생').addClass('play-button');
+		                this.videoWrapper.append(playButton);
+		                playButton.on('click', () => {
+		                    this.video.muted = false;
+		                    this.video.play();
+		                    playButton.remove();
+		                });
+		            }
+		        };
+	
+		        Game.init();
+		    });
 	    </script>
     </body>
 </html>
