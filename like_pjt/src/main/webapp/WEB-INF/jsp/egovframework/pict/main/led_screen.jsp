@@ -44,7 +44,7 @@
 	          		<video src="/img/test.mp4" type="video/mp4"></video>
 	          	</div>
 	        </div>
-	        <button class="btn">버튼</button>
+	        <button class="btn" style="display : none">버튼</button>
 	    </div>
 	
 	    <script>
@@ -103,7 +103,7 @@
 		                this.gameAreaSize = this.gameArea[0].getBoundingClientRect();
 		                this.circleSize = 200;
 		                this.circlesPerClick = 1;
-		                this.maxCircles = 500;
+		                this.maxCircles = 200;
 		                this.currentCircles = 0;
 		                this.gameEnded = false;
 		                
@@ -161,7 +161,7 @@
 		            },
 	
 		            updatePercentage: function() {
-		                var percentage = Math.min((current_cnt / this.maxCircles) * 100, 100);
+		                var percentage = Math.floor((current_cnt / 500) * 100);
 		                this.countSpan.text(Math.floor(percentage));
 		                
 		                var minHeight = 2;
