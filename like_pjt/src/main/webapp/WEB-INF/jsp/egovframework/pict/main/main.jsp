@@ -17,13 +17,13 @@
 	        		<div class="phoneImg">
 	        			<img src="/img/phone.png" alt="">
 	        			<div class="qrImg">
-	        				<img src="/img/qr-test.png" alt="">
+	        				<img src="/img/qr코드.jpg" alt="">
 	        			</div>
         			</div>
 	        		<div class="phoneImg">
 	        			<img src="/img/phone.png" alt="">
 	        			<div class="qrImg">
-	        				<img src="/img/qr-test.png" alt="">
+	        				<img src="/img/qr코드.jpg" alt="">
 	        			</div>
         			</div>
 	        	</div>
